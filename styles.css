@@ -290,12 +290,14 @@ h1 {
     overflow: hidden;
     padding: 35px 20px;
 
-    background:
+    background-color: #dceefa;
+
+    background-image:
         linear-gradient(
             rgba(223, 243, 250, 0.20),
             rgba(217, 229, 247, 0.25)
         ),
-        url("images/aquarium/Background.png");
+        url("/18_meses_Anto/images/aquarium/Background.png");
 
     background-size: cover;
     background-position: center;
