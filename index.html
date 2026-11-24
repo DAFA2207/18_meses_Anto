@@ -1,0 +1,482 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#eaf6fc">
+    <title>18 meses contigo ♡</title>
+
+    <!-- Nuestra hoja de estilos -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Nuestro archivo de JavaScript -->
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- PANTALLA 1: CARTA DE BIENVENIDA -->
+    <main id="welcome-screen" class="screen">
+
+        <div class="welcome-content">
+
+            <p class="small-heading">
+                UN PEQUEÑO REGALO PARA ALGUIEN ESPECIAL
+            </p>
+
+            <h1>Para mi persona favorita ♡</h1>
+
+            <p class="instruction">
+                Hay algo que preparé para ti...
+            </p>
+
+            <!-- SOBRE -->
+            <div class="envelope-container">
+
+                <button
+                    id="envelope-button"
+                    class="envelope"
+                    aria-label="Abrir la carta"
+                    aria-expanded="false"
+                >
+                    <div class="envelope-back"></div>
+
+                    <div class="letter">
+                        <span class="letter-heart">♡</span>
+                        <span class="letter-preview">Para ti...</span>
+                    </div>
+
+                    <div class="envelope-front"></div>
+
+                    <div class="envelope-flap"></div>
+
+                    <div class="envelope-seal">♡</div>
+                </button>
+
+            </div>
+
+            <p id="envelope-hint" class="envelope-hint">
+                Toca el sobre para abrirlo
+            </p>
+
+            <!-- MENSAJE DE LA CARTA -->
+            <section id="letter-message" class="letter-message" hidden>
+
+                <p class="letter-greeting">
+                    ¡Hola, mi niña linda! ♡
+                </p>
+
+                <h2>¡Bienvenida a esta carta especial!</h2>
+
+                <p>
+                    Bienvenida a la celebración de nuestro año y medio juntos
+                    y a este acuario lleno de recuerdos, razones y sorpresas
+                    que preparé especialmente para ti.
+                </p>
+
+                <p>
+                    Espero que disfrutes este pequeño gesto tanto como yo
+                    disfruté preparándolo.
+                </p>
+
+                <button id="enter-button" class="primary-button">
+                    Entrar a nuestro acuario ♡
+                </button>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+        <!-- PANTALLA 2: NUESTRO ACUARIO -->
+    <main id="aquarium-screen" class="screen aquarium-screen" hidden>
+
+        <!-- Decoración submarina -->
+        <div class="water-bubbles" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <!-- Corales decorativos -->
+        <div class="coral-decoration" aria-hidden="true">
+            <img
+                src="images/aquarium/Coral.png"
+                class="coral coral-left"
+                alt=""
+            >
+
+            <img
+                src="images/aquarium/Coral.png"
+                class="coral coral-right"
+                alt=""
+            >
+        </div>
+
+        <!-- Peces nadando -->
+        <div class="swimming-fish" aria-hidden="true">
+
+            <img
+                src="images/aquarium/Fish_1.png"
+                class="fish fish-one"
+                alt=""
+            >
+
+            <img
+                src="images/aquarium/Fish_2.png"
+                class="fish fish-two"
+                alt=""
+            >
+
+            <img
+                src="images/aquarium/Fish_3.png"
+                class="fish fish-three"
+                alt=""
+            >
+
+            <img
+                src="images/aquarium/Fish_4.png"
+                class="fish fish-four"
+                alt=""
+            >
+
+            <img
+                src="images/aquarium/Fish_5.png"
+                class="fish fish-five"
+                alt=""
+            >
+
+            <img
+                src="images/aquarium/Batman_swimming.png"
+                class="swimming-character batman-swimming"
+                alt=""
+            >
+
+            <img
+                src="images/aquarium/Hello_kitty_Swimming.png"
+                class="swimming-character hello-kitty-swimming"
+                alt=""
+            >
+
+        </div>
+
+        <!-- Encabezado del acuario -->
+        <header class="aquarium-header">
+            <p class="small-heading">18 MESES CONTIGO ♡</p>
+            <h1>Nuestro pequeño acuario</h1>
+            <p>Un lugar lleno de pequeñas cosas que me recuerdan lo mucho que te amo.</p>
+        </header>
+
+        <!-- ÁREA DE LAS PECERAS -->
+        <section class="tank-container">
+
+            
+            <!-- PECERA 1: LAS 18 CONCHITAS -->
+            <article class="tank-scene active" data-scene="0">
+
+                <p class="tank-number">PECERA 1 DE 4</p>
+
+                <h2>18 pequeñas razones</h2>
+
+                <p class="tank-description">
+                    Dieciocho conchitas, cada una guardando una razón por la que te amo.
+                </p>
+
+                <div id="shell-grid" class="shell-grid">
+                    <!-- JavaScript colocará aquí las 18 conchitas -->
+                </div>
+
+                <p class="shell-hint">Abre cada conchita y descubre una razón ♡</p>
+
+                 <!-- Estrellas de mar decorativas -->
+                <div class="shell-decorations" aria-hidden="true">
+
+                <img
+                    src="images/shells/Starfish_1.png"
+                    class="shell-starfish starfish-left"
+                    alt=""
+                >
+
+                <img
+                    src="images/shells/Starfish_2.png"
+                    class="shell-starfish starfish-right"
+                    alt=""
+                >
+
+                </div>
+
+            </article>
+
+           
+
+            
+            <!-- PECERA 2: MENSAJES EN BOTELLAS -->
+            <article class="tank-scene" data-scene="1">
+
+                <p class="tank-number">PECERA 2 DE 4</p>
+
+                <h2>Mensajes en botellas</h2>
+
+                <p class="tank-description">
+                    Cuatro pequeños mensajes que quiero que encuentres
+                    cuando más los necesites.
+                </p>
+
+                <div id="bottle-grid" class="bottle-grid">
+                    <!-- JavaScript colocará aquí las cuatro botellas -->
+                </div>
+
+                <p class="bottle-hint">
+                    Elige una botella y descubre lo que guarda para ti ♡
+                </p>
+
+            </article>
+
+
+            
+            <!-- PECERA 3: NUESTRA CANCIÓN -->
+            <article class="tank-scene" data-scene="2">
+
+                <p class="tank-number">PECERA 3 DE 4</p>
+
+                <h2>Una canción para nosotros ♡</h2>
+
+                <p class="tank-description">
+                    Hay canciones que logran expresar lo que a veces
+                    las palabras no pueden.
+                </p>
+
+                
+            <div class="music-layout">
+
+                <!-- DISCO Y DECORACIONES MUSICALES -->
+                <div class="vinyl-scene" aria-hidden="true">
+
+                    <img
+                        src="images/music/disc.png"
+                        class="vinyl-disc"
+                        alt=""
+                    >
+
+                    <!-- Peces y medusa bailarines -->
+                    <img
+                        src="images/music/Dancing_fish_1.jpeg"
+                        class="dancing-fish dancing-fish-one"
+                        alt=""
+                    >
+
+                    <img
+                        src="images/music/Dancing_fish_2.webp"
+                        class="dancing-fish dancing-fish-two"
+                        alt=""
+                    >
+
+                    <img
+                        src="images/music/Dancing_fish_3.png"
+                        class="dancing-fish dancing-fish-three"
+                        alt=""
+                    >
+
+                    <img
+                        src="images/music/Dancing_fish_1.jpg"
+                        class="dancing-jellyfish"
+                        alt=""
+                    >
+
+                    <!-- Notas musicales flotantes -->
+                    <div class="floating-notes">
+                        <span>♪</span>
+                        <span>♫</span>
+                        <span>♪</span>
+                        <span>♫</span>
+                    </div>
+
+                </div>
+
+                <!-- REPRODUCTOR DE YOUTUBE -->
+                <div class="music-player">
+
+                    <div class="music-player-heading">
+                        <span>♪</span>
+                        <div>
+                            <h3>Risk It All</h3>
+                            <p>Bruno Mars</p>
+                        </div>
+                        <span>♫</span>
+                    </div>
+
+                    <div class="youtube-container">
+
+                        <iframe
+                            src="https://www.youtube-nocookie.com/embed/lY5V4hSLWY8"
+                            title="Risk It All - Bruno Mars"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen>
+                        </iframe>
+
+                    </div>
+
+                    <p class="music-note">
+                        Una canción que quiero compartir contigo ♡
+                    </p>
+
+                    <a
+                        class="youtube-link"
+                        href="https://youtu.be/lY5V4hSLWY8?si=7BjT8S46qYbdyVka"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        Escuchar directamente en YouTube ♡
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            </article>
+
+            <!-- PECERA 4: ¿ME AMAS? -->
+            <article class="tank-scene" data-scene="3">
+
+                <p class="tank-number">PECERA 4 DE 4</p>
+
+                <h2>Una preguntita importante...</h2>
+
+                <p class="tank-description">
+                    Hay algo que quiero preguntarte. Y espero que
+                    elijas la respuesta correcta... ♡
+                </p>
+
+                <div class="love-game">
+
+                    <div class="love-game-heart">
+                        <img src="images/game/Hearts.png" alt="">
+                    </div>
+
+                    <div class="love-question">
+
+                        <img
+                            src="images/aquarium/Jellyfish.png"
+                            class="question-jellyfish jellyfish-left"
+                            alt=""
+                        >
+
+                        <h3>¿Me amas?</h3>
+
+                        <img
+                            src="images/game/Jellyfish_2.png"
+                            class="question-jellyfish jellyfish-right"
+                            alt=""
+                        >
+
+                    </div>
+
+                    <div class="love-game-buttons">
+
+                        <button id="yes-button" class="primary-button">
+                            ¡Siiii! ♡
+                        </button>
+
+                        <button id="no-button" class="no-button">
+                            No
+                        </button>
+
+                    </div>
+
+                    <p id="love-game-message" class="love-game-message" hidden></p>
+
+                </div>
+
+            </article>
+
+        </section>
+        <!-- FIN DEL ÁREA DE LAS PECERAS -->
+
+
+
+        <!-- TARJETA DE LAS RAZONES -->
+        <div id="reason-modal" class="reason-modal" hidden>
+
+            <div class="reason-card" role="dialog"
+                aria-modal="true" aria-labelledby="reason-title">
+
+                <button id="close-reason" class="close-reason"
+                        aria-label="Cerrar">×</button>
+
+                <p class="reason-label">UNA PEQUEÑA RAZÓN ♡</p>
+
+                <div class="reason-shell">
+                    <img src="images/shells/pearl.png" alt="Una pequeña perla">
+                </div>
+
+                <h2 id="reason-title">Te amo porque...</h2>
+
+                <p id="reason-text" class="reason-text"></p>
+
+                <p id="reason-counter" class="reason-counter"></p>
+
+            </div>
+
+        </div>
+
+
+        <!-- TARJETA DE LOS MENSAJES -->
+        <div id="message-modal" class="message-modal" hidden>
+
+            <div class="message-card" role="dialog"
+                aria-modal="true" aria-labelledby="message-title">
+
+                <button id="close-message" class="close-message"
+                        aria-label="Cerrar">×</button>
+
+                <p class="message-label">UN MENSAJITO PARA TI ♡</p>
+
+                <div class="message-bottle-icon">🍾</div>
+
+                <h2 id="message-title"></h2>
+
+                <div id="message-text" class="message-text"></div>
+
+                <p id="message-counter" class="message-counter"></p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- NAVEGACIÓN -->
+        <nav class="tank-navigation" aria-label="Navegación entre peceras">
+
+            <button id="previous-tank" class="nav-arrow" aria-label="Pecera anterior" disabled>
+                ←
+            </button>
+
+            <div class="tank-indicators" aria-label="Posición en el acuario">
+                <span class="tank-dot active"></span>
+                <span class="tank-dot"></span>
+                <span class="tank-dot"></span>
+                <span class="tank-dot"></span>
+            </div>
+
+            <button id="next-tank" class="nav-arrow" aria-label="Siguiente pecera">
+                →
+            </button>
+
+        </nav>
+
+        <p class="navigation-hint">Explora nuestro acuario ♡</p>
+
+    </main>
+
+</body>
+</html>

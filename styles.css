@@ -1,0 +1,1616 @@
+
+/* ==================================
+   1. CONFIGURACIÓN GENERAL
+================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    background: #eaf6fc;
+    color: #45677f;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+.screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    overflow: hidden;
+    position: relative;
+    background:
+        radial-gradient(circle at 15% 20%, #ffffff 0 2px, transparent 3px),
+        radial-gradient(circle at 85% 75%, #ffffff 0 3px, transparent 4px),
+        linear-gradient(145deg, #edfaff, #e7e9fb);
+}
+
+/* ==================================
+   2. CONTENIDO DE BIENVENIDA
+================================== */
+
+.welcome-content,
+.aquarium-welcome {
+    width: 100%;
+    max-width: 650px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.small-heading {
+    color: #a68bc9;
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+}
+
+h1 {
+    color: #527995;
+    font-size: clamp(2rem, 6vw, 3rem);
+    margin-bottom: 15px;
+}
+
+.instruction {
+    font-size: 1rem;
+    margin-bottom: 35px;
+    color: #7795a9;
+}
+
+/* ==================================
+   3. EL SOBRE
+================================== */
+
+.envelope-container {
+    width: 280px;
+    height: 190px;
+    margin: 0 auto 25px;
+    perspective: 1000px;
+}
+
+.envelope {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: block;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    perspective: 1000px;
+}
+
+.envelope-back {
+    position: absolute;
+    inset: 0;
+    background: #d9c9ed;
+    border-radius: 8px;
+    z-index: 1;
+}
+
+/* La carta que está dentro del sobre */
+
+.letter {
+    position: absolute;
+    width: 88%;
+    height: 155px;
+    left: 6%;
+    top: 12px;
+    background: #fffaf2;
+    border-radius: 5px;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    transition: transform 1s ease;
+}
+
+.letter-heart {
+    font-size: 2rem;
+    color: #e9a5c5;
+}
+
+.letter-preview {
+    font-family: Georgia, serif;
+    font-style: italic;
+    color: #927cae;
+}
+
+/* Parte delantera del sobre */
+
+.envelope-front {
+    position: absolute;
+    inset: 0;
+    background: #f1d6e7;
+    clip-path: polygon(0 0, 50% 58%, 100% 0, 100% 100%, 0 100%);
+    border-radius: 8px;
+    z-index: 4;
+}
+
+/* Solapa superior */
+
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: #e6c5df;
+    clip-path: polygon(0 0, 100% 0, 50% 62%);
+
+    transform-origin: top center;
+    transition: transform 0.8s ease;
+    z-index: 5;
+}
+
+/* Sello de corazón */
+
+.envelope-seal {
+    position: absolute;
+    left: 50%;
+    top: 53%;
+    transform: translate(-50%, -50%);
+
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+
+    background: #d995bd;
+    color: white;
+    font-size: 1.7rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 6;
+    transition: opacity 0.3s ease;
+}
+
+/* Animación al abrir */
+
+.envelope.open .envelope-flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.envelope.open .letter {
+    transform: translateY(-115px);
+}
+
+.envelope.open .envelope-seal {
+    opacity: 0;
+}
+
+.envelope-hint {
+    color: #9a86b7;
+    font-size: 0.9rem;
+    animation: gentle-pulse 2s infinite;
+}
+
+@keyframes gentle-pulse {
+    50% {
+        opacity: 0.55;
+    }
+}
+
+/* ==================================
+   4. MENSAJE DE LA CARTA
+================================== */
+
+.letter-message {
+    max-width: 480px;
+    margin: 15px auto 0;
+    padding: 30px 28px;
+
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid #f1dceb;
+    border-radius: 20px;
+
+    box-shadow: 0 12px 35px rgba(115, 137, 169, 0.12);
+
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.letter-message.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.letter-greeting {
+    color: #c17fa8;
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    margin-bottom: 12px;
+}
+
+.letter-message h2 {
+    color: #6687a1;
+    font-family: Georgia, serif;
+    font-size: 1.5rem;
+    margin-bottom: 18px;
+}
+
+.letter-message p {
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+/* ==================================
+   5. BOTONES
+================================== */
+
+.primary-button {
+    border: none;
+    border-radius: 30px;
+    padding: 14px 25px;
+    margin-top: 12px;
+
+    background: #c5addf;
+    color: white;
+
+    font-size: 0.95rem;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.primary-button:hover {
+    background: #b497d4;
+    transform: translateY(-3px);
+}
+
+/* ==================================
+   6. PANTALLA DEL ACUARIO
+================================== */
+
+.aquarium-screen {
+    min-height: 100vh;
+    min-height: 100svh;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    overflow: hidden;
+    padding: 35px 20px;
+
+    background:
+        linear-gradient(
+            rgba(223, 243, 250, 0.20),
+            rgba(217, 229, 247, 0.25)
+        ),
+        url("../images/aquarium/Background.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Burbujas animadas */
+
+.water-bubbles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.water-bubbles span {
+    position: absolute;
+    bottom: -60px;
+    width: 40px;
+    height: 40px;
+
+    border: 1px solid rgba(255,255,255,0.85);
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            rgba(255,255,255,0.95),
+            rgba(255,255,255,0.12) 65%
+        );
+
+    box-shadow:
+        inset -2px -2px 4px rgba(255,255,255,0.12),
+        0 0 8px rgba(255,255,255,0.18);
+
+    animation: bubble-rise 12s linear infinite;
+}
+
+.water-bubbles span:nth-child(1) {
+    left: 8%;
+    animation-duration: 13s;
+}
+
+.water-bubbles span:nth-child(2) {
+    left: 22%;
+    width: 20px;
+    height: 20px;
+    animation-duration: 17s;
+    animation-delay: 2s;
+}
+
+.water-bubbles span:nth-child(3) {
+    left: 39%;
+    animation-duration: 11s;
+    animation-delay: 4s;
+}
+
+.water-bubbles span:nth-child(4) {
+    left: 55%;
+    width: 9px;
+    height: 9px;
+    animation-duration: 15s;
+    animation-delay: 1s;
+}
+
+.water-bubbles span:nth-child(5) {
+    left: 70%;
+    animation-duration: 12s;
+    animation-delay: 5s;
+}
+
+.water-bubbles span:nth-child(6) {
+    left: 85%;
+    width: 18px;
+    height: 18px;
+    animation-duration: 16s;
+    animation-delay: 3s;
+}
+
+.water-bubbles span:nth-child(7) {
+    left: 95%;
+    animation-duration: 14s;
+    animation-delay: 6s;
+}
+
+.water-bubbles span:nth-child(8) {
+    left: 48%;
+    width: 7px;
+    height: 7px;
+    animation-duration: 18s;
+    animation-delay: 7s;
+}
+
+@keyframes bubble-rise {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translateY(-50vh) translateX(18px);
+    }
+
+    100% {
+        transform: translateY(-110vh) translateX(-12px);
+        opacity: 0;
+    }
+}
+
+/* Encabezado */
+
+.aquarium-header {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.aquarium-header .small-heading {
+    margin-bottom: 10px;
+}
+
+.aquarium-header h1 {
+    font-size: clamp(1.8rem, 5vw, 2.7rem);
+    margin-bottom: 10px;
+}
+
+.aquarium-header > p:last-child {
+    line-height: 1.7;
+    color: #68869b;
+}
+
+/* Escenarios de las peceras */
+
+.tank-container {
+    width: 100%;
+    max-width: 650px;
+    min-height: 300px;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.tank-scene {
+    width: 100%;
+    min-height: 280px;
+    padding: 35px 25px;
+    border: 1px solid rgba(255,255,255,0.85);
+    border-radius: 28px;
+    background: rgba(255,255,255,0.55);
+    box-shadow: 0 15px 40px rgba(91,132,160,0.10);
+    text-align: center;
+
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.tank-scene.active {
+    display: flex;
+    animation: scene-appear 0.45s ease both;
+}
+
+@keyframes scene-appear {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tank-emoji {
+    font-size: 3.5rem;
+    margin-bottom: 5px;
+}
+
+.tank-number {
+    color: #a68bc9;
+    font-size: 0.7rem;
+    font-weight: bold;
+    letter-spacing: 2.5px;
+}
+
+.tank-scene h2 {
+    color: #527995;
+    font-family: Georgia, serif;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+.tank-description {
+    max-width: 400px;
+    color: #6e879b;
+    line-height: 1.8;
+}
+
+.tank-decoration {
+    margin-top: 12px;
+    font-size: 1.6rem;
+    letter-spacing: 5px;
+}
+
+/* Flechas de navegación */
+
+.tank-navigation {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    position: relative;
+    z-index: 1;
+    flex: 0 0 auto;
+}
+
+.nav-arrow {
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(255,255,255,0.9);
+    border-radius: 50%;
+    background: rgba(255,255,255,0.75);
+    color: #6886a2;
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.nav-arrow:hover:not(:disabled) {
+    transform: scale(1.1);
+    background: white;
+}
+
+.nav-arrow:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+/* Indicadores de posición */
+
+.tank-indicators {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tank-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.7);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.tank-dot.active {
+    background: #ad91ca;
+    transform: scale(1.4);
+}
+
+.navigation-hint {
+    position: relative;
+    z-index: 1;
+    color: #829cb0;
+    font-size: 0.85rem;
+}
+
+
+/* ==================================
+   CONCHITAS Y RAZONES
+================================== */
+
+.shell-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+    width: 100%;
+    max-width: 440px;
+    margin: 18px auto 8px;
+}
+
+.shell-button {
+    aspect-ratio: 1;
+    border: 1px solid rgba(255,255,255,0.75);
+    border-radius: 18px;
+
+    background: rgba(255,240,248,0.55);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 7px;
+
+    cursor: pointer;
+    position: relative;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.shell-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+
+    transition: transform 0.25s ease;
+}
+
+.shell-button:hover {
+    transform: translateY(-4px) scale(1.06);
+
+    background: rgba(255,255,255,0.9);
+
+    box-shadow:
+        0 6px 15px rgba(214,155,190,0.2);
+}
+
+.shell-button:hover img {
+    transform: rotate(-5deg);
+}
+
+.shell-button.discovered {
+    background: rgba(255,225,240,0.8);
+    border-color: rgba(230,170,205,0.8);
+}
+
+.shell-button.discovered::after {
+    content: "♡";
+
+    position: absolute;
+    top: 2px;
+    right: 5px;
+
+    font-size: 0.85rem;
+    color: #d995bd;
+}
+
+.shell-hint {
+    color: #829cb0;
+    font-size: 0.8rem;
+    margin-top: 8px;
+}
+
+/* ==================================
+   TARJETA DE LAS RAZONES
+================================== */
+
+.reason-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(64, 91, 119, 0.35);
+    backdrop-filter: blur(5px);
+}
+
+.reason-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 35px 25px;
+    border-radius: 25px;
+    background: #fffaf5;
+    border: 1px solid #f2ddeb;
+    box-shadow: 0 15px 45px rgba(70, 100, 130, 0.2);
+    text-align: center;
+    position: relative;
+    animation: scene-appear 0.3s ease both;
+}
+
+.close-reason {
+    position: absolute;
+    top: 12px;
+    right: 17px;
+    border: none;
+    background: transparent;
+    color: #a68bc9;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+.reason-label {
+    color: #c17fa8;
+    font-size: 0.7rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.reason-shell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 12px auto;
+}
+
+.reason-shell img {
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
+}
+
+.reason-card h2 {
+    color: #6687a1;
+    font-family: Georgia, serif;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.reason-text {
+    color: #6e879b;
+    font-family: Georgia, serif;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    margin: 15px 0;
+}
+
+.reason-counter {
+    color: #b497d4;
+    font-size: 0.8rem;
+    margin-top: 20px;
+}
+
+@media (max-width: 480px) {
+    .shell-grid {
+        gap: 8px;
+        max-width: 340px;
+    }
+
+    .shell-button {
+        font-size: 1.5rem;
+        border-radius: 12px;
+    }
+
+    .reason-card {
+        padding: 30px 20px;
+    }
+}
+
+
+/* ==================================
+   7. ADAPTACIÓN A CELULARES
+================================== */
+
+@media (max-width: 480px) {
+
+    .envelope-container {
+        width: 250px;
+        height: 170px;
+    }
+
+    .letter {
+        height: 140px;
+    }
+
+    .envelope.open .letter {
+        transform: translateY(-100px);
+    }
+
+    .letter-message {
+        padding: 25px 20px;
+    }
+
+    .aquarium-screen {
+        padding: 25px 16px;
+        gap: 15px;
+    }
+
+    .tank-container {
+        min-height: 290px;
+    }
+
+    .tank-scene {
+        min-height: 270px;
+        padding: 25px 18px;
+    }
+
+    .tank-navigation {
+        gap: 22px;
+    }
+
+}
+
+
+/* ==================================
+   8. BOTELLAS CON MENSAJES
+================================== */
+
+.bottle-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    width: 100%;
+    max-width: 430px;
+    margin: 25px auto 10px;
+    justify-items: center;
+}
+
+.bottle-button {
+    width: 85px;
+    height: 120px;
+    padding: 6px;
+    border: 1px solid rgba(255,255,255,0.8);
+    border-radius: 22px;
+    background: rgba(255,255,255,0.35);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    position: relative;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.bottle-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.25s ease;
+}
+
+.bottle-button:hover {
+    transform: translateY(-7px) rotate(-4deg);
+    background: rgba(255,255,255,0.75);
+    box-shadow: 0 8px 18px rgba(100,140,170,0.15);
+}
+
+.bottle-button:hover img {
+    transform: scale(1.06);
+}
+
+.bottle-button.discovered {
+    background: rgba(255,225,240,0.65);
+    border-color: rgba(230,170,205,0.8);
+}
+
+.bottle-button.discovered::after {
+    content: "♡";
+    position: absolute;
+    top: 3px;
+    right: 6px;
+    font-size: 0.9rem;
+    color: #d995bd;
+}
+
+.bottle-hint {
+    color: #829cb0;
+    font-size: 0.8rem;
+    margin-top: 12px;
+}
+
+/* ==================================
+   9. TARJETA DE LOS MENSAJES
+================================== */
+
+.message-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 25;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(64, 91, 119, 0.4);
+    backdrop-filter: blur(6px);
+}
+
+.message-card {
+    width: 100%;
+    max-width: 520px;
+    max-height: 85vh;
+    max-height: 85svh;
+    overflow-y: auto;
+    padding: 35px 30px;
+    border-radius: 25px;
+    background: #fffaf5;
+    border: 1px solid #f2ddeb;
+    box-shadow: 0 15px 45px rgba(70, 100, 130, 0.2);
+    text-align: center;
+    position: relative;
+    animation: scene-appear 0.3s ease both;
+}
+
+.close-message {
+    position: absolute;
+    top: 12px;
+    right: 17px;
+    border: none;
+    background: transparent;
+    color: #a68bc9;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+.message-label {
+    color: #c17fa8;
+    font-size: 0.7rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.message-bottle-icon {
+    font-size: 3rem;
+    margin: 18px 0;
+}
+
+.message-card h2 {
+    color: #6687a1;
+    font-family: Georgia, serif;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.message-text {
+    color: #6e879b;
+    font-family: Georgia, serif;
+    font-size: 1rem;
+    line-height: 1.9;
+    text-align: left;
+    white-space: pre-line;
+    margin: 15px 0;
+}
+
+.message-counter {
+    color: #b497d4;
+    font-size: 0.8rem;
+    margin-top: 22px;
+}
+
+/* Adaptación de las botellas a celulares */
+
+@media (max-width: 480px) {
+
+    .bottle-grid {
+        gap: 12px;
+        max-width: 330px;
+    }
+
+    .bottle-button {
+        width: 62px;
+        height: 90px;
+        font-size: 2.3rem;
+    }
+
+    .message-card {
+        padding: 30px 22px;
+    }
+
+    .message-card h2 {
+        font-size: 1.3rem;
+    }
+
+}
+
+
+/* ==================================
+   10. REPRODUCTOR MUSICAL
+================================== */
+
+.music-layout {
+    display: grid;
+    grid-template-columns: 190px minmax(0, 1fr);
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 610px;
+    margin: 20px auto 0;
+}
+
+.music-player {
+    width: 100%;
+    max-width: 390px;
+    margin: 0 auto;
+}
+
+.music-player-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.65);
+    color: #a68bc9;
+}
+
+.music-player-heading h3 {
+    color: #527995;
+    font-family: Georgia, serif;
+    font-size: 1.15rem;
+}
+
+.music-player-heading p {
+    color: #829cb0;
+    font-size: 0.85rem;
+    margin-top: 4px;
+}
+
+.music-player-heading > span {
+    font-size: 1.5rem;
+}
+
+.youtube-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 18px;
+    background: #dceaf2;
+    box-shadow: 0 10px 25px rgba(70,100,130,0.12);
+}
+
+.youtube-container iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.music-note {
+    color: #829cb0;
+    font-size: 0.8rem;
+    margin-top: 15px;
+}
+
+@media (max-width: 480px) {
+
+    .music-player {
+        max-width: 100%;
+    }
+
+    .music-player-heading {
+        padding: 12px 15px;
+    }
+
+}
+
+/* ==================================
+   11. JUEGO: ¿ME AMAS?
+================================== */
+
+.love-game {
+    width: 100%;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.love-game-heart {
+    width: 95px;
+    height: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: heart-beat 2s ease-in-out infinite;
+}
+
+.love-game-heart img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+@keyframes heart-beat {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+.love-game h3 {
+    color: #c17fa8;
+    font-family: Georgia, serif;
+    font-size: 1.6rem;
+}
+
+.love-game-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.no-button {
+    border: 1px solid #e7c5d9;
+    border-radius: 30px;
+    padding: 14px 25px;
+    margin-top: 12px;
+    background: #fff;
+    color: #b77d9f;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.love-game-message {
+    max-width: 400px;
+    color: #6687a1;
+    line-height: 1.8;
+    margin-top: 10px;
+}
+
+/* Celebración de corazones */
+
+.love-game {
+    position: relative;
+    overflow: hidden;
+}
+
+.celebration-heart {
+    position: absolute;
+    bottom: 0;
+    font-size: 1.5rem;
+    pointer-events: none;
+    animation: heart-float 2.5s ease-out forwards;
+}
+
+@keyframes heart-float {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.5);
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-180px) scale(1.4) rotate(20deg);
+    }
+}
+
+.youtube-link {
+    display: inline-block;
+    margin-top: 12px;
+    color: #a68bc9;
+    font-size: 0.85rem;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+/* ==================================
+   CORALES DECORATIVOS
+================================== */
+
+.coral-decoration {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.coral {
+    position: absolute;
+    bottom: -15px;
+
+    width: 190px;
+    height: auto;
+
+    opacity: 0.85;
+    object-fit: contain;
+
+    user-select: none;
+}
+
+.coral-left {
+    left: -25px;
+}
+
+.coral-right {
+    right: -25px;
+    transform: scaleX(-1);
+}
+
+/* ==================================
+   PECES NADANDO
+================================== */
+
+.swimming-fish {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.fish {
+    position: absolute;
+    width: 75px;
+    height: auto;
+    object-fit: contain;
+    opacity: 0.9;
+    user-select: none;
+}
+
+/* Pez 1: mira a la derecha */
+
+.fish-one {
+    top: 20%;
+    left: -100px;
+    animation: fish-swim-right 24s linear infinite;
+}
+
+/* Pez 2: mira a la derecha */
+
+.fish-two {
+    top: 42%;
+    right: -100px;
+    animation: fish-swim-left 30s linear infinite;
+    animation-delay: 5s;
+    transform: scaleX(-1);
+}
+
+/* Pez 3: mira a la derecha */
+
+.fish-three {
+    top: 68%;
+    left: -100px;
+    width: 60px;
+    animation: fish-swim-right 32s linear infinite;
+    animation-delay: 8s;
+}
+
+/* Pez 4: mira a la izquierda */
+
+.fish-four {
+    top: 30%;
+    right: -100px;
+    width: 55px;
+    animation: fish-swim-left 27s linear infinite;
+    animation-delay: 12s;
+}
+
+/* Pez 5: mira a la izquierda */
+
+.fish-five {
+    top: 80%;
+    right: -100px;
+    width: 65px;
+    animation: fish-swim-left 35s linear infinite;
+    animation-delay: 15s;
+}
+
+/* Batman y Hello Kitty nadando */
+
+.swimming-character {
+    position: absolute;
+    width: 110px;
+    height: auto;
+    object-fit: contain;
+    opacity: 0.95;
+    user-select: none;
+}
+
+/* Batman: nada de izquierda a derecha */
+
+.batman-swimming {
+    top: 55%;
+    left: -130px;
+    animation: fish-swim-right 28s linear infinite;
+    animation-delay: 3s;
+}
+
+/* Hello Kitty: nada de derecha a izquierda */
+
+.hello-kitty-swimming {
+    top: 12%;
+    right: -130px;
+    transform: scaleX(-1);
+    animation: fish-swim-left 34s linear infinite;
+    animation-delay: 9s;
+}
+
+/* Movimiento horizontal */
+
+@keyframes fish-swim-right {
+    0% {
+        translate: 0 0;
+    }
+
+    50% {
+        translate: 50vw -12px;
+    }
+
+    100% {
+        translate: calc(100vw + 150px) 5px;
+    }
+}
+
+@keyframes fish-swim-left {
+    0% {
+        translate: 0 0;
+    }
+
+    50% {
+        translate: -50vw 12px;
+    }
+
+    100% {
+        translate: calc(-100vw - 150px) -5px;
+    }
+}
+
+/* ==================================
+   DECORACIÓN DE LA PECERA 1
+================================== */
+
+.tank-scene[data-scene="0"] {
+    position: relative;
+    overflow: hidden;
+}
+
+.shell-decorations {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.tank-scene:not(.active) .shell-decorations {
+    display: none;
+}
+
+.shell-starfish {
+    position: absolute;
+    width: 55px;
+    height: auto;
+    opacity: 0.75;
+    object-fit: contain;
+}
+
+.starfish-left {
+    top: 25px;
+    left: 15px;
+    transform: rotate(-20deg);
+}
+
+.starfish-right {
+    bottom: 25px;
+    right: 15px;
+    transform: rotate(20deg);
+}
+
+/* Mantener el contenido sobre las decoraciones */
+
+.tank-scene[data-scene="0"] > :not(.shell-decorations) {
+    position: relative;
+    z-index: 1;
+}
+
+
+/* ==================================
+   DISCO Y DECORACIONES MUSICALES
+================================== */
+
+.vinyl-scene {
+    position: relative;
+    width: 190px;
+    height: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Disco giratorio */
+
+.vinyl-disc {
+    width: 155px;
+    height: 155px;
+    object-fit: contain;
+    animation: vinyl-spin 8s linear infinite;
+    filter: drop-shadow(0 8px 12px rgba(80,100,140,0.18));
+    z-index: 1;
+}
+
+@keyframes vinyl-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Peces bailarines */
+
+.dancing-fish {
+    position: absolute;
+    width: 75px;
+    height: auto;
+    object-fit: contain;
+    z-index: 2;
+    animation: fish-dance 2.5s ease-in-out infinite;
+}
+
+.dancing-fish-one {
+    top: 8px;
+    right: -5px;
+    animation-delay: 0s;
+}
+
+.dancing-fish-two {
+    bottom: 15px;
+    left: -5px;
+    animation-delay: 0.5s;
+}
+
+.dancing-fish-three {
+    top: 35px;
+    left: -10px;
+    width: 65px;
+    animation-delay: 1s;
+}
+
+.dancing-jellyfish {
+    position: absolute;
+    width: 65px;
+    height: auto;
+    object-fit: contain;
+    right: -5px;
+    bottom: 5px;
+    z-index: 2;
+    animation: jellyfish-dance 3s ease-in-out infinite;
+}
+
+@keyframes fish-dance {
+    0%, 100% {
+        transform: translateY(0) rotate(-5deg);
+    }
+
+    50% {
+        transform: translateY(-9px) rotate(5deg);
+    }
+}
+
+@keyframes jellyfish-dance {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+/* Notas musicales flotantes */
+
+.floating-notes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.floating-notes span {
+    position: absolute;
+    bottom: 30px;
+    color: #a68bc9;
+    font-size: 1.5rem;
+    opacity: 0;
+    animation: musical-note-rise 3.5s ease-in-out infinite;
+}
+
+.floating-notes span:nth-child(1) {
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.floating-notes span:nth-child(2) {
+    left: 65%;
+    animation-delay: 1s;
+}
+
+.floating-notes span:nth-child(3) {
+    left: 45%;
+    animation-delay: 2s;
+}
+
+.floating-notes span:nth-child(4) {
+    left: 80%;
+    animation-delay: 2.7s;
+}
+
+@keyframes musical-note-rise {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.8;
+    }
+
+    80% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-150px) rotate(25deg);
+        opacity: 0;
+    }
+}
+
+/* Adaptación para pantallas pequeñas */
+
+@media (max-width: 650px) {
+
+    .music-layout {
+        grid-template-columns: 1fr;
+        gap: 5px;
+        max-width: 440px;
+    }
+
+    .vinyl-scene {
+        width: 100%;
+        height: 190px;
+        margin: 0 auto;
+    }
+
+    .vinyl-disc {
+        width: 135px;
+        height: 135px;
+    }
+
+    .music-player {
+        max-width: 100%;
+    }
+
+}
+
+
+/* Medusitas a los lados de la pregunta */
+
+.love-question {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    width: 100%;
+    position: relative;
+}
+
+.question-jellyfish {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+    flex-shrink: 0;
+    animation: question-jellyfish-float 3s ease-in-out infinite;
+}
+
+.jellyfish-left {
+    animation-delay: 0s;
+}
+
+.jellyfish-right {
+    animation-delay: 1.2s;
+}
+
+@keyframes question-jellyfish-float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.love-question h3 {
+    margin: 0;
+    white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+
+    .love-question {
+        gap: 10px;
+    }
+
+    .question-jellyfish {
+        width: 48px;
+        height: 48px;
+    }
+
+}
+
