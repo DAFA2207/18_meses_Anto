@@ -295,7 +295,7 @@ h1 {
             rgba(223, 243, 250, 0.20),
             rgba(217, 229, 247, 0.25)
         ),
-        url("../images/aquarium/Background.png");
+        url("images/aquarium/Background.png");
 
     background-size: cover;
     background-position: center;
